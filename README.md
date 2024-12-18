@@ -10,12 +10,13 @@ You can find the GitHub repository for this project here: [GitHub Repository](ht
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Features](#features)
-5. [Project Files](#project-files)
-6. [Functions](#functions)
-7. [Models](#models)
-8. [CLI Script](#cli-script)
+3. [Features](#features)
+4. [Project Files](#project-files)
+5. [Functions](#functions)
+6. [Models](#models)
+7. [CLI Script](#cli-script)
+8. [Acknowledge](#acknowledge)
+9. [Usage](#usage)
 
 ---
 
@@ -35,7 +36,7 @@ To get started with the project, follow these steps:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/AleoStacy/Phase3-project.git
     ```
 
 2. Navigate into the project directory:
@@ -57,14 +58,6 @@ To get started with the project, follow these steps:
     ```
 
 ---
-
-## Usage
-
-After setting up the virtual environment, run the CLI script to start interacting with the application.
-
-```bash
-python cli.py
-
 # FEATURES
 
 1. View Product: Display a product’s details.
@@ -159,3 +152,11 @@ q. Quit
 - Alembic: Used for handling database migrations.
 - Faker: A Python library used in the seed.py file to generate mock data for testing.
 - Pipenv: Used to manage dependencies and virtual environment.
+
+## Usage
+
+After setting up the virtual environment, run the CLI script to start interacting with the application.
+
+```bash
+python cli.py
+
