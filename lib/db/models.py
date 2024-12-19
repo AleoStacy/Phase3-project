@@ -10,7 +10,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(String)
-    price = Column(Float, nullable=False)
+    price = Column(Float, nullable=False)  # Price in Kenyan Shillings
     in_stock = Column(Boolean, default=True)
 
 class Customer(Base):
