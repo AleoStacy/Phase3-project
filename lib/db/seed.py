@@ -1,14 +1,14 @@
 from models import Product, Customer, Order, SessionLocal
 from faker import Faker
 
-# Initialize a Faker instance to generate fake data
+# Initialized a Faker instance to generate fake data
 fake = Faker()
 
-# Create a database session
+# Created a database session
 db = SessionLocal()
 
+# Seed Products
 products = [
-
     {"name": "Laptop", "description": "A high-performance laptop for professionals.", "price": 85000},
     {"name": "Smartphone", "description": "A sleek smartphone with the latest features.", "price": 40000},
     {"name": "Headphones", "description": "Noise-canceling headphones for immersive sound.", "price":12000},
@@ -29,8 +29,6 @@ products = [
     {"name": "Smart Home Humidifier", "description": "Monitor and control your home's humidity.", "price": 2000},
 ]
 
-    
-
 for product in products:
     db.add(Product(
         name=product["name"],
@@ -39,7 +37,7 @@ for product in products:
         in_stock=fake.boolean()
     ))
 
-# came up with 5 fake customers with unique emails
+# Seed Test Customers
 for _ in range(5):
     first_name = fake.first_name().lower()
     customer = Customer(
@@ -48,19 +46,35 @@ for _ in range(5):
     )
     db.add(customer)
 
-# Came up with 20 fake orders
-for _ in range(20):
-    order = Order(
-        customer_id=fake.random_int(min=1, max=5),
-        product_id=fake.random_int(min=1, max=10),
-        quantity=fake.random_int(min=1, max=5)
-    )
-    db.add(order)
-
-# Commit the changes to the database
+# Commit seeded data
 db.commit()
+
+# Interactive Order Creation
+name = input("Enter your name: ")
+email = input("Enter your email: ")
+
+# Check if the customer exists
+existing_customer = db.query(Customer).filter(Customer.email == email).first()
+
+if not existing_customer:
+    # Add the customer to the database
+    new_customer = Customer(name=name, email=email)
+    db.add(new_customer)
+    db.commit()
+    db.refresh(new_customer)  # Refresh to access the new ID
+    customer_id = new_customer.id
+else:
+    customer_id = existing_customer.id
+
+# Create an order
+product_id = int(input("Enter the product ID you want to order: "))
+quantity = int(input("Enter the quantity: "))
+
+new_order = Order(customer_id=customer_id, product_id=product_id, quantity=quantity)
+db.add(new_order)
+db.commit()
+
+print(f"Order created successfully for {name}!")
 
 # Close the session
 db.close()
-
-print("Database seeded successfully with meaningful product data!")
